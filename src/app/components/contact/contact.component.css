@@ -1,0 +1,19 @@
+.contact-card {
+    min-width: 200px;
+    max-width: 500px;
+    margin:30px;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .contact-button {
+    margin:10px;
+    padding: 10px 20px;
+    background-color: #951ba0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

@@ -1,0 +1,61 @@
+<div class="centered-content"><h1>HOME</h1>
+<h2>FIND A COACH</h2>
+</div>
+
+
+<div align="center">
+<mat-card [ngStyle]="{'max-width': skills.length*150+'px'}">
+  <mat-card-header>
+    <mat-card-title align="center">Select specialization</mat-card-title>
+  </mat-card-header>
+  <mat-card-content align="start">
+    <mat-list role="list" class="horizontal-list" >
+      <mat-list-item role="listitem" *ngFor="let item of items">
+        <mat-checkbox [(ngModel)]="item.flag" [ngModelOptions]="{standalone:true}" (change)="onCheckboxChange($event)">
+        {{item.skill}}
+      </mat-checkbox>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+</div>
+
+<div align="center">
+  <button mat-fab extended [ngStyle]="{ 'margin': '10px' }" (click)="search()">
+    <mat-icon>search</mat-icon>
+    SEARCH
+  </button>
+  <button mat-fab extended color="primary" [ngStyle]="{ 'margin': '10px' }" routerLink="/signin">
+    <mat-icon>how_to_reg</mat-icon>
+    SIGNIN
+  </button>
+  <button mat-fab extended color="primary" [ngStyle]="{ 'margin': '10px' }" routerLink="/registration">
+    <mat-icon>person_add</mat-icon>
+    SIGNUP
+  </button>
+
+</div>
+<mat-grid-list  cols="2" rowHeight="2:1">
+  <mat-grid-tile [colspan]="1" *ngFor="let coach of people" >
+    <div >
+      <mat-card class="coach-card" >
+          <mat-card-header>
+            <mat-card-title>
+              <p>Name: {{coach.firstName}} </p>
+              <p>Surname: {{coach.lastName}}</p>
+          </mat-card-title>
+            <mat-card-subtitle>Hourly Rate: €{{coach.hourlyRate}}/hour</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content align="start">
+              <mat-chip *ngFor="let skill of coach.skills" >{{skill}}</mat-chip>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button [routerLink]='getAuthentication()? "/contact/"+coach.id:"/signin"'>CONTACT</button>
+            <button mat-button routerLink="/detail/{{coach.id}}">DETAILS</button>
+          </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<router-outlet></router-outlet> 

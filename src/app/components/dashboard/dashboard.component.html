@@ -1,0 +1,26 @@
+
+<mat-sidenav-container class="example-container" >
+    <mat-sidenav mode="side" opened><h1>Sidenav content</h1>
+    <mat-list role="list">
+        <mat-list-item role="listitem" routerLink="about" [routerLinkActive]="'selected'">ABOUT</mat-list-item>
+        <mat-list-item role="listitem" routerLink="home" [routerLinkActive]="'selected'">
+          <mat-icon>home</mat-icon>
+          HOME</mat-list-item>
+        <mat-list-item role="listitem" routerLink="signin" [routerLinkActive]="'selected'">
+          <mat-icon>login</mat-icon>
+          LOGIN</mat-list-item>
+        <mat-list-item role="listitem" routerLink="profile" [routerLinkActive]="'selected'">
+          <mat-icon>person</mat-icon>
+          PROFILE</mat-list-item>
+        <mat-list-item role="listitem" routerLink="registration" [routerLinkActive]="'selected'">
+          <mat-icon>person_add</mat-icon>
+          SIGNUP</mat-list-item>
+
+        <button [ngStyle]="{'margin':'20px'}" (click)="signOut()"><mat-icon>logout</mat-icon></button>
+
+      </mat-list>      
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>  
+    </mat-sidenav-content>
+  </mat-sidenav-container>

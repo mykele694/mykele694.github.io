@@ -1,0 +1,81 @@
+<ng-template *ngIf="!isAuthenticated(); then onForm;else alreadyIn"></ng-template>
+<ng-template #onForm>
+<ng-template *ngIf="!registration;then signup else register"></ng-template>
+
+<ng-template #signup>
+    <div align="center"><h1>REGISTRATION {{registration}}</h1></div>
+<form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)" >
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="text" name="email" ngModel required email>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" [(ngModel)]="password" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Repeat Password</mat-label>
+        <input matInput type="text" name="passwordValidate" [(ngModel)]="passwordValidate" required >
+        
+    </mat-form-field>
+    <ng-template *ngIf="password !== passwordValidate;then notValid;else valid"></ng-template>
+    <ng-template #notValid>
+        <div>
+            Passwords do not match.
+        </div>
+        <button mat-raised-button color="primary" type="submit" disabled>Submit</button>
+    </ng-template> 
+    <ng-template #valid>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Submit</button>
+    </ng-template>
+    <div>{{!advice? "":"Mail AlreadyExists"}}</div>
+</form>  
+</ng-template>
+
+<ng-template #register>
+    <h1>REGISTRATION FORM</h1>
+
+<form #registrationForm="ngForm" (ngSubmit)="onRegistration(registrationForm)" >
+    <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" name="firstName" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" name="dob" ngModel required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="checked" name="coach">Are you a coach?</mat-checkbox>
+    </section>
+
+    <span *ngIf="checked" class="example-list-section">
+        <h3>Select your specialization</h3>
+        <ul>
+          <li *ngFor="let item of items">
+            <mat-checkbox [(ngModel)]="item.flag" [ngModelOptions]="{standalone:true}">
+              {{item.skill}}
+            </mat-checkbox>
+          </li>
+        </ul>
+        <mat-form-field>
+            <mat-label>Hourly Rate</mat-label>
+            <input matInput type="number" name="hourRate" ngModel required>
+        </mat-form-field>
+    </span>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.valid">Submit</button>
+</form>  
+</ng-template>
+</ng-template>
+
+<ng-template #alreadyIn>
+    You are already logged in
+</ng-template>

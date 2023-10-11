@@ -1,0 +1,86 @@
+<ng-template *ngIf="!onEdit;then showProfile else inputChange"></ng-template>
+<ng-template #showProfile>
+  <div class="profile" >
+    <h2>User Profile</h2>
+    <div class="profile-info" *ngIf="person">
+      <p><strong>Name: </strong>{{ person.firstName }}</p>
+      <p><strong>Surname: </strong>{{ person.lastName }}</p>
+      <p><strong>Email: </strong>{{ person.email }}</p>
+      <p><strong>Date of Birth: </strong>{{ person.dob }}</p>
+      <p><strong>Hourly Rate: </strong>{{ person.hourlyRate }}</p>
+      <p><strong>Skill: </strong></p>
+      <p *ngFor="let skill of person.skills"> {{ skill }}</p>
+      <p><strong>BIO: </strong>{{person.bio}}</p>
+    </div>
+    <button class="profile-button" (click)="editProfile()">Edit Profile</button>
+  </div>
+</ng-template>
+
+<ng-template #inputChange>
+  <div class="profile">
+    <form class="example-form" #editForm="ngForm" (ngSubmit)="submitChange(editForm)" >
+      <p><strong>Name: </strong>
+        <mat-form-field class="example-full-width">
+          <input matInput type="text" [ngModel]=person.firstName name="firstName"  required >
+        </mat-form-field>
+      </p>
+      <p><strong>Surname: </strong>
+        <mat-form-field class="example-full-width">
+          <input matInput type="text" [ngModel]=person.lastName name="lastName"  required >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" [ngModel]=dob name="dob"  required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+     </p>
+      <p><strong>Email: </strong>
+        <mat-form-field class="example-full-width">
+          <input matInput [ngModel]=person.email name="email" ngModel required email>
+        </mat-form-field>
+      </p>
+      <p><strong>Password: </strong>
+        <mat-form-field >
+          <input [type]="showPassword? 'text':'password'" matInput [ngModel]=person.password name="password"  required >
+        </mat-form-field>          
+        <button mat-icon-button color="primary" aria-label="Example icon" (click)="showPass()">
+          <mat-icon>{{showPassword? 'visibility':'visibility_off'}}</mat-icon>
+        </button>
+      </p> 
+
+      <p><strong>Bio: </strong>
+        <mat-form-field class="example-full-width" >
+          <textarea  matInput [ngModel]=person.bio name="bio" ></textarea>
+        </mat-form-field>
+      </p>
+
+      <div> 
+        <p><strong>Are you a coach? </strong></p>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="checked" name="coach"></mat-checkbox>
+      </section>
+      </div>
+      <p><strong>HourlyRate: </strong>
+        <mat-form-field class="example-full-width">
+          <input matInput [ngModel]=person.hourlyRate name="hourlyRate" ngModel >
+        </mat-form-field>
+      </p>
+      <div><strong>Skill: </strong>
+      <ul>
+        <li *ngFor="let item of items">
+          <mat-checkbox [(ngModel)]="item.flag" [ngModelOptions]="{standalone:true}">
+            {{item.skill}}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </div>
+    <button mat-button class="profile-button" type="submit" [disabled]="!editForm.valid"><mat-icon>check</mat-icon>Confirm Changes</button>
+    <button (click)="showLog()">SHOW CONSOLE.LOG</button>
+    <button mat-button class="profile-button" [ngStyle]="{'background-color':'#F33131'}" (click)="deleteProfile()"><mat-icon>person-cancel</mat-icon>REMOVE PROFILE</button>    
+  </form> 
+  </div>
+</ng-template>

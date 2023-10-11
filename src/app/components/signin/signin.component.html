@@ -1,0 +1,25 @@
+<ng-template *ngIf="!isAuthenticated(); then onForm;else alreadyIn"></ng-template>
+<ng-template #onForm>
+<div  align="center"><h1>Login</h1></div>
+
+
+<form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)" >
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="text" name="email" ngModel required email>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="text" name="password" ngModel required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!signInForm.valid">Submit</button>
+    <button mat-raised-button color="primary" type="submit" (click)="goToRegistration()" >
+        <mat-icon>person_add</mat-icon>
+        Registration</button>
+</form>  
+</ng-template>
+
+<ng-template #alreadyIn>
+    You are already in
+</ng-template>

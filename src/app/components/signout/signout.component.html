@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-card-title [ngStyle]="{'margin':'15px'}">Logout Confirmation</mat-card-title>
+    <mat-card-content>
+      Are you sure you want to log out?
+    </mat-card-content>
+    <mat-card-actions>
+      <button [mat-dialog-close]="true" mat-button color="warn" (click)="signOut()">Logout</button>
+    </mat-card-actions>
+</mat-card>

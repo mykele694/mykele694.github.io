@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+.centered-content {
+    text-align: center;
+}
+
+.coach-card {
+    min-width: 350px;
+    max-width: 400px;
+    margin:30px;
+  }
+
+  .horizontal-list {
+    display: flex;
+    flex-direction: row; /* Make items display horizontally */
+    align-items: center; /* Vertically center items within the row */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+  }
+  
+  .mat-list-item {
+    margin-right: 16px; /* Add spacing between items (adjust as needed) */
+  }
